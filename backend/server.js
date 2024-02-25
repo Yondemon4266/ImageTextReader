@@ -1,21 +1,21 @@
 // server.js
 const express = require("express");
-const vision = require("@google-cloud/vision");
+const dotenv = require("dotenv").config();
 const app = express();
 const cors = require("cors");
 const multer = require("multer");
 const upload = multer();
 const { detectTextOnImage } = require("./detectTextOnImage");
 const { detectThemes } = require("./detectThemes");
-
+const port = process.env.SERVER_PORT;
 const corsOptions = {
-  origin: ["http://localhost:5500"],
+  origin: [process.env.CLIENT_URL, process.env.CLIENT_URL2],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
 
 app.use(cors(corsOptions));
 app.post("/detectTextOnImage", upload.single("file"), detectTextOnImage);
 app.post("/detectThemes", upload.single("file"), detectThemes);
-app.listen(9999, () => {
-  console.log("Server is running on port 9999");
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });

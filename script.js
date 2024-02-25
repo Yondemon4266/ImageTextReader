@@ -40,10 +40,13 @@ async function uploadFile(file) {
   try {
     const formData = new FormData();
     formData.append("file", file);
-    const response = await fetch("http://localhost:9999/detectTextOnImage", {
-      method: "POST",
-      body: formData,
-    });
+    const response = await fetch(
+      `${process.env.SERVER_URL}/detectTextOnImage`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
     const data = await response.json();
     return data;
   } catch (err) {
