@@ -41,7 +41,7 @@ async function uploadFile(file) {
     const formData = new FormData();
     formData.append("file", file);
     const response = await fetch(
-      `${process.env.SERVER_URL}/detectTextOnImage`,
+      `https://imagetextreader.onrender.com/detectTextOnImage`,
       {
         method: "POST",
         body: formData,
